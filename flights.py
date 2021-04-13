@@ -13,19 +13,21 @@ class flights_info:
 	def get_source_code(self): 
 		
 	
-		driver = webdriver.Chrome(executable_path = '/home/dagnei/Documentos/projetos/price-tracker/chromedriver')
+		driver = webdriver.Chrome(executable_path = 'C:/Users/Pichau/Desktop/projects/price-tracker/chromedriver.exe')
 		driver.get(self.url)
 		input_box1 = driver.find_element_by_xpath('//*[@id="i6"]/div[4]/div/div/div[1]/div/div/input')
 		input_box1.send_keys('O')
 		input_box2 = driver.find_element_by_xpath('//*[@id="i6"]/div[6]/div[2]/div[2]/div[1]/div/input')
 		input_box2.send_keys('rlando' + Keys.ENTER)
 		search_button = driver.find_element_by_xpath('//*[@id="yDmH0d"]/c-wiz[2]/div/div[2]/div/c-wiz/div/c-wiz/div[2]/div[1]/div[2]/div/button')
+		time.sleep(1)
 		search_button.click()
 		time.sleep(3)
-		driver.quit()
 		source = driver.page_source
 		self.url_for_scraping = driver.current_url
 		self.source = source
+		driver.quit()
+		
 
 	def get_info(self):
 		soup = BeautifulSoup(self.source, 'html.parser')
@@ -45,7 +47,4 @@ class flights_info:
 			info.append([airline, stopovers, price, dt])
 		self.info = info
 	
-
-	
-		
 
