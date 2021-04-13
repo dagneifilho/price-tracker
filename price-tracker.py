@@ -2,7 +2,6 @@ import requests
 import bs4
 import smtplib
 from email.message import EmailMessage
-
 def Scraper(url):
 
     headers = {
@@ -39,10 +38,24 @@ def Scraper(url):
     product = [name, price]
     return product
 
+def MailNotification(receiverEmail, product, price, url):
+    msg = EmailMessage()
+    msg['Subject'] = 'Price notification'
+    msg['from'] = 'Price Tracker'
+    msg['To'] = receiverEmail
+    msg.set_content(f'The product: {product}'
+        f'\nIs on: {url}'
+        f'\nFor R${price}'
+        )
+    with smtplib.SMTP(host = 'smtp.gmail.com', port = 587) as smtp:
+        smtp.ehlo()
+        smtp.starttls()
+        smtp.login('dagsfilho@gmail.com','dagnei290198')
+        smtp.send_message(receiverEmail)    
 
 url = 'https://www.amazon.com.br/Baby-doll-Renda-Gr%C3%A9cia-Promo%C3%A7%C3%A3o/dp/B084NXWDDW/ref=pd_sbs_4?pd_rd_w=0VQci&pf_rd_p=f2ff7d31-774f-476b-ad0b-255506b1ebcf&pf_rd_r=W0ZVVG5ADXWZEF8P6RCJ&pd_rd_r=0c3dec9d-1d8f-47c6-8120-7c220049d57e&pd_rd_wg=677Du&pd_rd_i=B084NV4DDN&psc=1'
-#product = Scraper(url)
+product = Scraper(url)
 
-
-#print(product[0])
-#print(product[1])
+MailNotification('dagneifilho@gmail.com',product[0],product[1],url)
+print(product[0])
+print(product[1])
