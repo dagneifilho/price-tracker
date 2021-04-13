@@ -21,9 +21,6 @@ class flights_info:
 		input_box2.send_keys('rlando' + Keys.ENTER)
 		search_button = driver.find_element_by_xpath('//*[@id="yDmH0d"]/c-wiz[2]/div/div[2]/div/c-wiz/div/c-wiz/div[2]/div[1]/div[2]/div/button')
 		search_button.click()
-
-				
-
 		time.sleep(3)
 		driver.quit()
 		source = driver.page_source
