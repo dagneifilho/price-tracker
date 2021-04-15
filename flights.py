@@ -13,7 +13,7 @@ class flights_info:
 	def get_source_code(self): 
 		
 	
-		driver = webdriver.Chrome(executable_path = 'C:/Users/Pichau/Desktop/projects/price-tracker/chromedriver.exe')
+		driver = webdriver.Chrome(executable_path = 'Chromedriver-path')
 		driver.get(self.url)
 		input_box1 = driver.find_element_by_xpath('//*[@id="i6"]/div[4]/div/div/div[1]/div/div/input')
 		input_box1.send_keys('O')
