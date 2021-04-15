@@ -61,7 +61,3 @@ class Email:
             print(f'An error occurred: {error} ')
 
 
-
-email = Email('dagneifilho@gmail.com','carro',15000,'google.com')
-
-email.send_message()
