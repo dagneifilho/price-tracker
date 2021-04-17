@@ -7,4 +7,3 @@ After that it this data will be sent to a SQL database and compare with the prev
 If the price is below the mean price, it will send an email (maybe a text message) with a notification.
 
 
-email: pricetrackerbydagnei@gmail.com
