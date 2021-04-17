@@ -1,5 +1,5 @@
 # price-tracker
-Developing
+
 
 
 The main program scrapes the google flights page and get the data of the best flights.
