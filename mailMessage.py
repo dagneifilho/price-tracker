@@ -9,26 +9,30 @@ from email.mime.text import MIMEText
 import base64
 
 
-class Email: 
-    def __init__(self,mailTo,product,price,url):
-        self.mailTo = mailTo
-        self.product = product
-        self.price = price
-        self.url = url
 
+class Email: 
+    def __init__(self,mailTo,flights):
+        self.mailTo = mailTo
+        self.flights = flights
 
     def create_message(self):
-        
-        message_text =( f'The product: {self.product}'
-                    f'\nIs available in: {self.url}'
-                    f'\nFor R$ {self.price}')
+        flights_info = 'Voos:\n '
+        for flight in self.flights:
+            flights_info += (f'Companhia: {flight[0]}'
+                        f'\nParadas: {flight[1]}'    
+                        f'\nPreço: R${flight[2]:.2f}'
+                        f'\nData da consulta: {flight[3]}\n')
+        message_text =( f'Verifiquei que os seguintes voos estão com um preço bom:'
+                        f'\n{flights_info}'
+                        '\nPode dar uma olhada no site: https://www.google.com/travel/flights')
         print(message_text)
         myMail = 'pricetrackerbydagnei@gmail.com'
         message = MIMEText(message_text)
         message['to'] = self.mailTo
         message['from'] = myMail
-        message['subject'] = 'We tracked the price of your product. '
-        return {'raw': base64.urlsafe_b64encode(message.as_string())}
+        message['subject'] = 'O preço das passagens parece ter abaixado.'
+        raw=base64.urlsafe_b64encode(message.as_bytes()).decode()
+        return {'raw':raw}
 
     
 
@@ -54,10 +58,9 @@ class Email:
     def send_message(self):
         service = self.authorization()
         try:
-            message = (service.users().messages().send(userId='me',body = self.create_message).execute())
-            print(f'Message Id: {message[id]}')
+            message = (service.users().messages().send(userId='me',body = self.create_message()).execute())
+            print(f'Email enviado.')
             return message
         except errors.HttpError as error:
             print(f'An error occurred: {error} ')
-
 
