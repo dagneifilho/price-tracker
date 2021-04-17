@@ -10,7 +10,7 @@ class data_toSQL:
 		self.db = mysql.connector.connect(
 			host = 'localhost',
 			user = 'root',
-			password = '290198',
+			password = 'password',
 			database = 'flightdatabase'
 		)
 	def insert(self):
