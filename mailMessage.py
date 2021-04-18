@@ -26,7 +26,7 @@ class Email:
                         f'\n{flights_info}'
                         '\nPode dar uma olhada no site: https://www.google.com/travel/flights')
         print(message_text)
-        myMail = 'pricetrackerbydagnei@gmail.com'
+        myMail = 'email'    # sender email
         message = MIMEText(message_text)
         message['to'] = self.mailTo
         message['from'] = myMail
