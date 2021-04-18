@@ -43,6 +43,6 @@ for flight in info:
 
 if len(good_price) > 0 :
     #Send email
-    email = Email('dagneifilho@gmail.com',good_price)
+    email = Email('email',good_price)
     email.create_message()
     email.send_message()
